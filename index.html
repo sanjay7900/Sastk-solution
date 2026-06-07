@@ -3,145 +3,462 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SASTK Solutions</title>
-
+<title>SASTK Solutions - Enterprise Softwaretitle>
+<link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0b1220;
-  color: #e5e7eb;
+/* BASE STYLES */
+:root {
+  --primary: #38bdf8;
+  --primary-dark: #0ea5e9;
+  --secondary: #1d4ed8;
+  --dark-bg: #0b1220;
+  --card-bg: #111827;
+  --border: #1f2937;
+  --text-light: #e5e7eb;
+  --text-gray: #94a3b8;
 }
 
-/* HERO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 
-  .logo {
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--dark-bg);
+  color: var(--text-light);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(11, 18, 32, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.5);
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  padding: 0.7rem 2rem;
+  background: rgba(11, 18, 32, 0.98);
+}
+
+.logo {
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 800;
   letter-spacing: 3px;
-  color: #38bdf8;
-  text-align: center;
-  padding: 10px 0;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo i {
+  font-size: 22px;
 }
 
 .logo::after {
-  content: " SOLUTIONS";
-  color: #e5e7eb;
-  font-weight: normal;
+  content: "SOLUTIONS";
+  color: var(--text-light);
+  font-weight: 400;
   letter-spacing: 1px;
+  margin-left: 0.5rem;
 }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.3s;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* HERO SECTION WITH PARALLAX */
 .hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  animation: fadeIn 1s ease-in;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(29, 78, 216, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #0f172a, #1e293b);
+  z-index: -1;
+}
+
+.hero-content {
+  max-width: 800px;
+  animation: fadeInUp 1s ease-out 0.2s both;
 }
 
 .hero h1 {
-  font-size: 44px;
-  margin: 0;
-  color: #38bdf8;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--primary), #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.2;
 }
 
 .hero p {
-  max-width: 700px;
-  margin: 15px auto;
-  color: #cbd5e1;
-  font-size: 16px;
+  font-size: 1.2rem;
+  color: var(--text-gray);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* ANIMATED BUTTON */
 .btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 22px;
-  background: #38bdf8;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #000;
-  font-weight: bold;
-  border-radius: 8px;
+  font-weight: 600;
+  border-radius: 50px;
   text-decoration: none;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn:hover {
-  background: #0ea5e9;
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: #000;
 }
 
 /* SECTIONS */
+.section {
+  padding: 5rem 2rem;
+}
+
 .container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-h2 {
-  color: #38bdf8;
-  margin-bottom: 20px;
-  border-left: 4px solid #38bdf8;
-  padding-left: 10px;
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
 }
 
-/* GRID */
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  color: var(--text-gray);
+  margin-bottom: 3rem;
+  max-width: 700px;
+}
+
+/* GRID & CARDS WITH ANIMATIONS */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
-/* CARD */
 .card {
-  background: #111827;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #1f2937;
-  transition: 0.4s ease;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
   opacity: 0;
   transform: translateY(30px);
+}
+
+.card.revealed {
   animation: slideUp 0.8s ease forwards;
 }
 
-.card:nth-child(1) { animation-delay: 0.1s; }
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.3s; }
-.card:nth-child(4) { animation-delay: 0.4s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
-.card:nth-child(6) { animation-delay: 0.6s; }
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
 
 .card:hover {
-  transform: translateY(-8px);
-  border-color: #38bdf8;
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--primary);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-light);
+}
+
+.card p {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+}
+
+/* STATS COUNTER */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(17, 24, 39, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(31, 41, 55, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: var(--text-gray);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* TAG STYLES */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
 }
 
 .tag {
-  display: inline-block;
-  background: #1d4ed8;
-  color: white;
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 5px;
-  margin: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(29, 78, 216, 0.2);
+  color: #60a5fa;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  transition: all 0.3s ease;
 }
 
-/* CONTACT */
-.contact {
-  background: #111827;
-  padding: 30px;
-  border-radius: 10px;
-  border: 1px solid #1f2937;
-  text-align: center;
+.tag:hover {
+  background: rgba(29, 78, 216, 0.4);
+  transform: translateY(-2px);
+}
+
+.tag i {
+  font-size: 0.8rem;
+}
+
+/* CONTACT FORM */
+.contact-form {
+  background: var(--card-bg);
+  padding: 3rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(31, 41, 55, 0.5);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-light);
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
 }
 
 /* FOOTER */
-footer {
+.footer {
+  background: #0f172a;
+  padding: 3rem 2rem;
   text-align: center;
-  padding: 20px;
-  color: #94a3b8;
+  border-top: 1px solid var(--border);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.footer-links a {
+  color: var(--text-gray);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+.copyright {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  margin-top: 2rem;
 }
 
 /* ANIMATIONS */
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideUp {
@@ -154,103 +471,412 @@ footer {
     transform: translateY(0);
   }
 }
-</style>
-</head>
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .nav-links {
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
+</stylehead>
 
 <body>
-<header>
-  <div class="logo">SASTK</div>
-  <p>Enterprise Software Development & Digital Engineering Services</p>
-</header>
-<div class="hero">
-  <h1>SASTK Solutions</h1>
-  <p>We build scalable, secure, and high-performance software solutions for enterprises and startups.</p>
-  <a class="btn" href="#contact">Get in Touch</a>
-</div>
+<!-- NAVBAR -->
+<nav class="navbar">
+div class="logo">
+    <i class="fas fai>SASTK
+div>
+div class="nav-links">
+    <a href="#home">a>
+a href="#services">Services</a>
+    <a href="#industries">Industa>
+a href="#technology">Technology</a>
+    <a href="#ai">AI Assistant</a>
+    <a href="#contact">a>
+div>
+</nav>
 
-<div class="container">
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+  <div class="hero-bdiv>
+div class="hero-content">
+h1>Transform Your Business with Enterprise Software Solutions</h1>
+p>We build scalable, secure, and high-performance software solutions that drive digital transformation for enterprises and startups worldwide.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+a href="#contact" class="btn">
+        <i class="fas fa-paper-plane"></i> Start a Project
+a>
+a href="#services" class="btn btn-outline">
+i class="fas fa-eye"></i> View Services
+a>
+div>
+div>
+div style="position: absolute; bottom: 2rem; animation: float 3s ease-in-out infinite;">
+i class="fas fa-chevron-down" style="color: var(--primary); font-size: 2i>
+div>
+</section>
 
-  <h2>About Us</h2>
-  <p>
-    We are a full-stack software engineering company specializing in enterprise systems,
-    cloud applications, APIs, and digital transformation solutions.
-  </p>
+<!-- ABOUT -->
+<section class="section">
+div class="container">
+    <h2 class="section-title">About SASTKh2>
+    <p class="section-subtitle">We are a full-stack software engineering company specializing in enterprise systems, cloud applications, APIs, and digital transformation solutions with over a decade of industry experience.</p>
+    
+    <!-- STATS -->
+    <div class="stats">
+div class="stat-card">
+div class="stat-number" data-count="150">0div>
+div class="stat-label">Projects Deldiv>
+div>
+div class="stat-card">
+div class="stat-number" data-count="50">0</div>
+        <div class="stat-label">Enterprisediv>
+div>
+div class="stat-card">
+div class="stat-number" data-count="99">0</div>
+        <div class="stat-label">% Clientdiv>
+div>
+div class="stat-card">
+div class="stat-number" data-count="10">0</div>
+        <div class="stat-label">Yearsdiv>
+div>
+div>
+div>
+</section>
 
-  <h2>Services</h2>
-  <div class="grid">
+<!-- SERVICES -->
+<section class="section" id="services" style="background: rgba(15, 23, 42, 0.5);">
+  <div class="container">
+h2 class="section-title">Ourh2>
+    <p class="section-subtitle">Comprehensive software development services tailored to your business needs</p>
+    
+div class="grid">
+      <div class="card">
+div class="cardi class="fas fa-laptop-code"></i></div>
+        <h3>Custom Softwareh3>
+        <p>Tailored solutions built from scratch to address your unique business requirements and workflows.</p>
+      </div>
+      
+div class="card">
+        <div class="card-icon"><i class="fas fa-gldiv>
+h3>Webh3>
+        <p>Modern web applications using .NET Core, Angular, React, and Vue.js with responsive design.</p>
+      </div>
+      
+div class="card">
+        <div class="card-icon"><i class="fas fadiv>
+h3>APIh3>
+        <p>RESTful and GraphQL APIs with comprehensive documentation, versioning, and security.</p>
+      </div>
+      
+div class="card">
+        <div class="card-icon"><i class="fas fadiv>
+h3>Cloud & DevOps</h3>
+p>AWS, Azure, and Google Cloud solutions with CI/CD pipelines, containerization, and monitoring.</p>
+      </div>
+      
+div class="card">
+        <div class="card-icon"><i class="fas fa-shielddiv>
+h3>Cyberh3>
+        <p>Security audits, penetration testing, compliance, and secure development lifecycle implementation.</p>
+      </div>
+      
+div class="card">
+        <div class="card-icon"><i class="fas fa-robot"></i></div>
+        <h3>Automationh3>
+        <p>Comprehensive test automation frameworks for web, mobile, and API testing with continuousp>
+div>
+div>
+div>
+</section>
 
-    <div class="card">Custom Software Development</div>
-    <div class="card">Web Apps (.NET + Angular)</div>
-    <div class="card">API Development</div>
-    <div class="card">Cloud & DevOps</div>
-    <div class="card">Cyber Security</div>
-    <div class="card">Automation Testing</div>
+<!-- INDUSTRIES -->
+<section class="section" id="industries">
+  <div class="container">
+h2 class="section-title">Industries Weh2>
+    <p class="section-subtitle">Domain expertise across multiple sectors with specializedp>
+    
+    <div class="grid">
+div class="card">
+        <div class="card-icon"><i class="fas fadiv>
+h3>Enterpriseh3>
+        <p>ERP, CRM, HRMS, and workflow automation for large organizations.</p>
+      </div>
+      
+div class="card">
+        <div class="card-icon"><i class="fas fa-chartdiv>
+h3>FinTech Platforms</h3>
+p>Payment gateways, banking systems, trading platforms, and financialp>
+div>
+      
+      <div class="card">
+div class="cardi class="fas fa-shopping-cdiv>
+h3>E-Commerceh3>
+        <p>Custom e-commerce platforms, marketplace integrations, and inventoryp>
+div>
+      
+      <div class="card">
+div class="cardi class="fas fa-tdiv>
+h3>Logistics Systems</h3>
+p>Fleet management, route optimization, tracking systems, and supply chainp>
+div>
+div>
+div>
+</section>
 
-  </div>
+<!-- TECHNOLOGY -->
+<section class="section" id="technology" style="background: rgba(15, 23, 42, 0.5);">
+  <div class="container">
+h2 class="section-title">Technologyh2>
+    <p class="section-subtitle">Modern technologies we excel at for building robust solutions</p>
+    
+div class="tags">
+      <span class="i class="fab fa-wi> .NETspan>
+span class="tag"><i class="fas fai> C#</span>
+      <span class="i class="fab fa-i>span>
+span class="tag"><i class="fab fai>span>
+span class="tag"><i class="fas fa-database"></i> SQLspan>
+span class="tag"><i class="fab fa-docker"></i> Docker</span>
+      <span class="i class="fas fa-mi>span>
+span class="tag"><i class="fab fa-linux"></i> Linux</span>
+      <span class="i class="fas fa-ci> Microservices</span>
+      <span class="i class="fab fa-i>span>
+span class="tag"><i class="fas fa-cloud"></i> Azure</span>
+      <span class="i class="fas fa-key"></i> OAuth 2.span>
+div>
+div>
+</section>
 
-  <h2>Industries</h2>
-  <div class="grid">
+<!-- AI ASSISTANT -->
+<section class="section" id="ai">
+div class="container">
+    <h2 class="section-title">AI-Powered Secure Assistant</h2>
+    
+    <div class="card" style="max-width: 900px; margin: 0 auto;">
+div class="cardi class="fas fa-div>
+h3>Enterprise AI Supporth3>
+      <p>SASTK Solutions implements a private and secure AI assistant system powered by local model infrastructure similarb>Ollb> for internal knowledge access and enhanced client interaction.</p>
+      
+div style="margin: 2rem 0;">
+        <h4 style="color: var(--primary); margin-bottom: 1rem;">Key Caph4>
+        <ul style="columns: 2; column-gap: 3rem; list-style: none;">
+li style="margin-bottom: 0.8i class="fas fa-check-circle" style="color: var(--primary); margin-right: 0.5rem;"></i> Instant project informationli>
+li style="margin-bottom: 0.8rem;"><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 0.5rem;"></i> Secure client query handling</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 0.5rem;"></i> Internal technical supportli>
+li style="margin-bottom: 0.8rem;"><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 0.5rem;"></i> Faster decision-making for enterprise systems</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 0.5rem;"></i> Code review and optimizationli>
+li style="margin-bottom: 0.8rem;"><i class="fas fa-check-circle" style="color: var(--primary); margin-right: 0.5rem;"></i> Documentationli>
+ul>
+div>
+      
+      <pb>Securityb> All AI processing is done in a controlled environment with no external data leakage, ensuring complete enterprise-grade privacy and compliance with industryp>
+      
+      <div class="tags" style="margin-top: 2rem;">
+        <span class="i class="fas fa-i> AI Assistant</span>
+        <span class="i class="fas fa-shield-alt"></i> Secure</span>
+        <span class="i class="fas fa-li> Private Models</span>
+        <span class="i class="fas fa-building"></i> Enterprisespan>
+span class="tag"><i class="fas fa-comi> Chatspan>
+span class="tag"><i class="fas fai> Local Inference</span>
+      </div>
+    </div>
+  </divsection>
 
-    <div class="card">Enterprise Systems</div>
-    <div class="card">FinTech Platforms</div>
-    <div class="card">E-Commerce Solutions</div>
-    <div class="card">Logistics Systems</div>
+<!-- CONTACT -->
+<section class="section" id="contact">
+div class="container">
+    <h2 class="section-title">Get inh2>
+    <p class="section-subtitle">Ready to start your project? Contact us for a consultationp>
+    
+    <div class="contact-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" class="form-control" placeholder="Enter your name">
+      </div>
+      
+div class="form-group">
+label for="email">Emaillabel>
+input type="email" id="email" class="form-control" placeholder="Enter your email">
+      </div>
+      
+div class="form-group">
+label for="company">Companylabel>
+input type="text" id="company" class="form-control" placeholder="Your company name">
+      </div>
+      
+div class="form-group">
+label for="message">Projectlabel>
+textarea id="message" class="form-control" rows="5" placeholder="Tell us about your project requirements..."></textarea>
+      </div>
+      
+button class="btn" style="width: 100%;">
+        <i class="fas fa-paperi> Send Message
+      </button>
+    </div>
+    
+div style="text-align: center; margin-top: 3rem;">
+      <pi class="fas fa-envelope" style="color: var(--primary); margin-right: 0.5i> <b>Email:</b> contact@sastksolutions.com</p>
+      <p style="margin-top: 1rem; color: var(--text-gray);">We are open for enterprise projects and long-term partnerships. Response within 24 hours.</p>
+    </div>
+  </divsection>
 
-  </div>
+<!-- FOOTERfooter class="footer">
+  <div class="footer-content">
+    <div>
+      <div class="logo" style="justify-content: center; margin-bottom: 1rem;">
+        <i class="fas fai>SASTK
+div>
+p>Enterprise Software Development & Digital Engineering Services</p>
+    </div>
+    
+div>
+h3 style="color: var(--primary); margin-bottom: 1rem;">Quickh3>
+      <div class="footer-links">
+a href="#home">Home</a>
+        <a href="#services">a>
+a href="#contact">Contact</a>
+        <a href="#ai">AIa>
+div>
+div>
+div>
+  
+  <div class="copyright">
+    © 2026 SASTK Solutions. All Rights Reserved. | Enterprise Software Development
+  </divfooter>
 
-  <h2>Technology Stack</h2>
-  <p>
-    <span class="tag">.NET Core</span>
-    <span class="tag">C#</span>
-    <span class="tag">Angular</span>
-    <span class="tag">SQL Server</span>
-    <span class="tag">Docker</span>
-    <span class="tag">Redis</span>
-    <span class="tag">Linux</span>
-    <span class="tag">Microservices</span>
-  </p>
-  <h2>AI-Powered Secure Assistant</h2>
+<script>
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
 
-<div class="card">
-  <h3>Enterprise AI Support System</h3>
-  <p>
-    SASTK Solutions uses a private and secure AI assistant system powered by local model infrastructure
-    similar to <b>Ollama</b> for internal knowledge access and client interaction.
-  </p>
+// Animated counter for stats
+function animateCounter() {
+  const counters = document.querySelectorAll('.stat-number');
+  const speed = 200;
+  
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-count');
+    const increment = target / speed;
+    let current = 0;
+    
+    const updateCounter = () => {
+      if (current < target) {
+        current += increment;
+        counter.innerText = Math.ceil(current);
+        setTimeout(updateCounter, 10);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    
+    updateCounter();
+  });
+}
 
-  <p>
-    This system helps in:
-  </p>
+// Card reveal animation on scroll
+function revealCards() {
+  const cards = document.querySelectorAll('.card');
+  const windowHeight = window.innerHeight;
+  
+  cards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if (cardTop < windowHeight - 100) {
+      card.classList.add('revealed');
+    }
+  });
+}
 
-  <ul>
-    <li>Instant project information and documentation access</li>
-    <li>Secure client query handling</li>
-    <li>Internal technical support automation</li>
-    <li>Faster decision-making for enterprise systems</li>
-  </ul>
+// Initialize animations
+window.addEventListener('load', () => {
+  revealCards();
+  
+  // Animate stats when they come into view
+  const statsSection = document.querySelector('.stats');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+});
 
-  <p>
-    <b>Security First:</b> All AI processing is done in a controlled environment with no external data leakage,
-    ensuring complete enterprise-grade privacy and compliance.
-  </p>
+// Scroll event for card reveal
+window.addEventListener('scroll', revealCards);
 
-  <span class="tag">AI Assistant</span>
-  <span class="tag">Secure</span>
-  <span class="tag">Private Models</span>
-  <span class="tag">Enterprise AI</span>
-</div>
+// Form submission (placeholder)
+document.querySelector('.contact-form .btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  alert('Thank you for your interest! This is a demo form. In a real implementation, this would send your inquiry to our team.');
+  document.querySelector('.contact-form').reset();
+});
 
-  <h2 id="contact">Contact</h2>
-  <div class="contact">
-    <p><b>Email:</b> contact@sastksolutions.com</p>
-    <p>We are open for enterprise projects and long-term partnerships.</p>
-  </div>
-
-</div>
-
-<footer>
-  © 2026 SASTK Solutions. All Rights Reserved.
-</footer>
-
-</body>
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 80,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+</scriptbody>
 </html>
