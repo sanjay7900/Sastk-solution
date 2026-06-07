@@ -1,145 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SASTK Solutions - Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SASTK Solutions</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-      line-height: 1.6;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1220;
+  color: #e5e7eb;
+}
 
-    header {
-      background: #111827;
-      padding: 30px;
-      text-align: center;
-    }
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  animation: fadeIn 1s ease-in;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-      color: #38bdf8;
-    }
+.hero h1 {
+  font-size: 44px;
+  margin: 0;
+  color: #38bdf8;
+}
 
-    header p {
-      margin-top: 10px;
-      color: #94a3b8;
-    }
+.hero p {
+  max-width: 700px;
+  margin: 15px auto;
+  color: #cbd5e1;
+  font-size: 16px;
+}
 
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 0;
-    }
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 22px;
+  background: #38bdf8;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
 
-    h2 {
-      color: #38bdf8;
-      margin-top: 40px;
-    }
+.btn:hover {
+  background: #0ea5e9;
+  transform: translateY(-3px);
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
+/* SECTIONS */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 20px;
+}
 
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid #334155;
-    }
+h2 {
+  color: #38bdf8;
+  margin-bottom: 20px;
+  border-left: 4px solid #38bdf8;
+  padding-left: 10px;
+}
 
-    .tag {
-      display: inline-block;
-      background: #0ea5e9;
-      color: #fff;
-      padding: 4px 8px;
-      font-size: 12px;
-      border-radius: 5px;
-      margin: 3px;
-    }
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: #111827;
-      margin-top: 40px;
-      color: #94a3b8;
-    }
+/* CARD */
+.card {
+  background: #111827;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  transition: 0.4s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.8s ease forwards;
+}
 
-    .note {
-      background: #1f2937;
-      padding: 15px;
-      border-left: 4px solid #38bdf8;
-      margin-top: 20px;
-    }
-  </style>
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: #38bdf8;
+}
+
+.tag {
+  display: inline-block;
+  background: #1d4ed8;
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  margin: 3px;
+}
+
+/* CONTACT */
+.contact {
+  background: #111827;
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  text-align: center;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #94a3b8;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
 </head>
 
 <body>
 
-<header>
+<div class="hero">
   <h1>SASTK Solutions</h1>
-  <p>We Deliver Products, Not Resources</p>
-</header>
+  <p>We build scalable, secure, and high-performance software solutions for enterprises and startups.</p>
+  <a class="btn" href="#contact">Get in Touch</a>
+</div>
 
 <div class="container">
 
   <h2>About Us</h2>
   <p>
-    SASTK Solutions is a software development company focused on building scalable,
-    secure, and high-performance digital products. Our team consists of experienced
-    developers, DevOps engineers, cybersecurity specialists, and QA experts.
+    We are a full-stack software engineering company specializing in enterprise systems,
+    cloud applications, APIs, and digital transformation solutions.
   </p>
 
-  <h2>What We Do</h2>
+  <h2>Services</h2>
   <div class="grid">
+
     <div class="card">Custom Software Development</div>
-    <div class="card">Web Applications (.NET + Angular)</div>
-    <div class="card">API Development & Integration</div>
-    <div class="card">DevOps & Cloud Deployment</div>
-    <div class="card">Cyber Security Consulting</div>
-    <div class="card">QA & Automation Testing</div>
+    <div class="card">Web Apps (.NET + Angular)</div>
+    <div class="card">API Development</div>
+    <div class="card">Cloud & DevOps</div>
+    <div class="card">Cyber Security</div>
+    <div class="card">Automation Testing</div>
+
   </div>
 
-  <h2>Portfolio (Capabilities)</h2>
-
+  <h2>Industries</h2>
   <div class="grid">
 
-    <div class="card">
-      <h3>Enterprise Applications</h3>
-      <p>ERP, CRM, Admin dashboards, business automation systems.</p>
-      <span class="tag">.NET Core</span>
-      <span class="tag">Angular</span>
-    </div>
-
-    <div class="card">
-      <h3>FinTech Systems</h3>
-      <p>Payment integrations, UPI systems, transaction platforms.</p>
-      <span class="tag">Security</span>
-      <span class="tag">APIs</span>
-    </div>
-
-    <div class="card">
-      <h3>E-Commerce Platforms</h3>
-      <p>Marketplace systems with vendor and order management.</p>
-      <span class="tag">Scalable</span>
-      <span class="tag">Cloud</span>
-    </div>
-
-    <div class="card">
-      <h3>Delivery Systems</h3>
-      <p>Real-time tracking, dispatch, and logistics platforms.</p>
-      <span class="tag">Realtime</span>
-      <span class="tag">Mobile Ready</span>
-    </div>
+    <div class="card">Enterprise Systems</div>
+    <div class="card">FinTech Platforms</div>
+    <div class="card">E-Commerce Solutions</div>
+    <div class="card">Logistics Systems</div>
 
   </div>
 
@@ -149,20 +185,17 @@
     <span class="tag">C#</span>
     <span class="tag">Angular</span>
     <span class="tag">SQL Server</span>
-    <span class="tag">Redis</span>
     <span class="tag">Docker</span>
-    <span class="tag">Jenkins</span>
+    <span class="tag">Redis</span>
     <span class="tag">Linux</span>
     <span class="tag">Microservices</span>
   </p>
 
-  <div class="note">
-    <b>Note:</b> We do not provide manpower outsourcing. We take full ownership of project delivery
-    from design to deployment and support.
+  <h2 id="contact">Contact</h2>
+  <div class="contact">
+    <p><b>Email:</b> contact@sastksolutions.com</p>
+    <p>We are open for enterprise projects and long-term partnerships.</p>
   </div>
-
-  <h2>Contact</h2>
-  <p>Email: contact@sastksolutions.com</p>
 
 </div>
 
